@@ -1,5 +1,5 @@
 -- MySQL server setup for development;
--- script creates database, db user and grants relevant privileges;
+-- script creates database, db user, and grants relevant privileges;
 
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 
