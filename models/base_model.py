@@ -18,7 +18,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         '''constructor
-        instantiates a new model/initializer
+        instantiates a new model
         '''
         if not kwargs:
             self.id = str(uuid.uuid4())
@@ -31,16 +31,21 @@ class BaseModel:
             kwargs['created_at'] = datetime.strptime(
                 kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f'
             )
-            del kwargs['__class__']
-            self.__dict__.update(kwargs)
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    setattr(self, key, value)
 
     def __str__(self):
         '''returns a string representation of the instance'''
-        cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        cls = self.__class__.__name__
+        attributes = {k: v for k, v in self.__dict__.items()
+                      if k != '_sa_instance_state'}
+        return '[{}] ({}) {}'.format(cls, self.id, attributes)
 
     def save(self):
-        '''updates updated_at with current time when instance is changed'''
+        '''
+        updates updated_at with current timestamp when instance is changed
+        '''
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
@@ -49,7 +54,7 @@ class BaseModel:
     def to_dict(self):
         '''converts instance into dict format'''
         dictionary = self.__dict__.copy()
-        del dictionary['_sa_instance_state']
+        dictionary.pop('_sa_instance_state', None)
         dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
