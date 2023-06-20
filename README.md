@@ -1,10 +1,26 @@
-<center> <h1>HBNB - The Console</h1> </center>
+# AirBnB clone - MySQL
 
-This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+<div align="center">
+ <img src="./hack/hbnb_console.png" height="150" width="600" />
+</div>
+
+> `OOP` `Back-end` `SQL` `MySQL` `ORM` `SQLAlchemy`
+
+This is a clone of the [AirBnB website](https://www.airbnb.com/). This specific part covers these concepts:  
+`shell/console(scommand interpreter)`, `Python Object Orientation(OOP)`, `Object-Relational Mapping - SQLAlchemy` `File Storage, and Database Storage` etc.
 
 ---
+### Basic Functionality
 
-<center><h3>Repository Contents by Project Task</h3> </center>
+`Specifications`:
+```bash
+    - create data models - Python Object Orientation, and ORM.
+    - manage objects via a console / command interpreter
+    - store and persist objects DBStorage, and to a file (JSON file)
+```
+
+---
+<center><h3>Repository Contents by Project Task</h3></center>
 
 | Tasks | Files | Description |
 | ----- | ----- | ------ |
@@ -21,21 +37,25 @@ This repository contains the initial stage of a student project to build a clone
 | 10. Console 1.0 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
 <br>
 <br>
-<center> <h2>General Use</h2> </center>
 
-1. First clone this repository.
+## Command Interprter
+> `command-line interface`<br/>
+> a shell implementation that uses the `Python` module `cmd`, which provides a simple framework for writing line-oriented command interpreters.
 
-3. Once the repository is cloned locate the "console.py" file and run it as follows:
-```
+
+### Usage:
+```bash
+# run the interpreter in interactive mode:
 /AirBnB_clone$ ./console.py
 ```
-4. When this command is run the following prompt should appear:
-```
+```bash
+# prompt designates you are in the "HBnB" console
 (hbnb)
 ```
-5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
 ##### Commands
+> There are a variety of commands available within the console program.  
+
     * create - Creates an instance based on given class
 
     * destroy - Destroys an object based on class and UUID
@@ -52,7 +72,7 @@ This repository contains the initial stage of a student project to build a clone
 ##### Alternative Syntax
 Users are able to issue a number of console command using an alternative syntax:
 
-	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
+	`Syntax`: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
 Advanced syntax is implemented for the following commands: 
 
     * all - Shows all objects the program has access to, or all objects of a given class
@@ -67,7 +87,8 @@ Advanced syntax is implemented for the following commands:
 
 <br>
 <br>
-<center> <h2>Examples</h2> </center>
+
+<center> <h2>Command Palette Examples</h2> </center>
 <h3>Primary Command Syntax</h3>
 
 ###### Example 0: Create an object
@@ -106,6 +127,7 @@ Usage: update <class_name> <_id>
 'updated_at': datetime.datetime(2020, 2, 18, 14, 33, 45, 729907), 'first_name': 'person'}
 (hbnb)
 ```
+
 <h3>Alternative Syntax</h3>
 
 ###### Example 0: Show all User objects
@@ -125,18 +147,37 @@ Usage: <class_name>.destroy(<_id>)
 ```
 ###### Example 2: Update User (by attribute)
 Usage: <class_name>.update(<_id>, <attribute_name>, <attribute_value>)
-```
+```bash
 (hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", name "Todd the Toad")
 (hbnb)
 (hbnb) User.all()
 (hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'name': 'Todd the Toad', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
+
 ###### Example 3: Update User (by dictionary)
 Usage: <class_name>.update(<_id>, <dictionary>)
-```
+```bash
 (hbnb) User.update("98bea5de-9cb0-4d78-8a9d-c4de03521c30", {'name': 'Fred the Frog', 'age': 9})
 (hbnb)
 (hbnb) User.all()
 (hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
 <br>
+
+---
+## Python Unit Tests
+> uses the `unittest` module for testing.<br/>
+> `path` to test files/for test coverage - directory: `tests/test_models`
+
+Running tests using Python test discovery...
+
+```bash
+# execute tests using this command for all tests: 
+$ python3 -m unittest discover tests
+# test file by file by using this command: 
+$ python3 -m unittest tests/test_models/test_base_model.py
+```
+
+## Authors
+
+You can find a list of contributors/project developers in the [authors](./AUTHORS) file.
