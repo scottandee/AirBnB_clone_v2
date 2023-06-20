@@ -23,8 +23,8 @@ class FileStorage:
                 if isinstance(value, cls):
                     cls_objects[key] = value
             return cls_objects
-
-        return FileStorage.__objects
+        else:
+            return FileStorage.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""

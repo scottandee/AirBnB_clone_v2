@@ -43,13 +43,13 @@ class BaseModel:
         '''updates updated_at with current time when instance is changed'''
         from models import storage
         self.updated_at = datetime.now()
-        storage.save()
         storage.new(self)
+        storage.save()
 
     def to_dict(self):
         '''converts instance into dict format'''
         dictionary = self.__dict__.copy()
-        dictionary.pop('_sa_instance_state', None)
+        del dictionary['_sa_instance_state']
         dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()

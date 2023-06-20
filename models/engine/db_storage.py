@@ -33,8 +33,11 @@ class DBStorage:
         self.__session = Session()
 
     def all(self, cls=None):
+        from models.state import State
+        from models.city import City
+
         objects = {}
-        classes = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
+        classes = {'State': State, 'City': City}
         if cls:
             if isinstance(cls, str) and cls in classes:
                 cls = eval(cls)
@@ -44,9 +47,8 @@ class DBStorage:
                     key = f"{type(obj).__name__}.{obj.id}"
                     objects[key] = obj
         else:
-            for cls_name in classes:
-                cls = eval(cls_name)
-                objs = self.__session.query(cls).all()
+            for key in classes.keys():
+                objs = self.__session.query(classes[key]).all()
                 for obj in objs:
                     key = f"{type(obj).__name__}.{obj.id}"
                     objects[key] = obj
