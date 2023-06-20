@@ -24,7 +24,7 @@ class FileStorage:
                     cls_objects[key] = value
             return cls_objects
 
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
