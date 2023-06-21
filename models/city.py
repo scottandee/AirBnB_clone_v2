@@ -1,17 +1,16 @@
 #!/usr/bin/python3
-""" City Module for HBNB project """
-
+''' City Module for HBNB project '''
 
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.place import Place
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+from models.base_model import BaseModel, Base
 
 
 class City(BaseModel, Base):
     '''the city class, contains state ID and name'''
-
     __tablename__ = 'cities'
     if getenv('HBNB_TYPE_STORAGE') is not None:
         name = Column(String(128), nullable=False)
