@@ -2,6 +2,8 @@
 """
 State Module for HBNB project
 """
+
+
 from os import getenv
 
 from sqlalchemy import Column, String, ForeignKey
