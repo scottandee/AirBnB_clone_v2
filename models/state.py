@@ -18,10 +18,14 @@ class State(BaseModel, Base):
     State class
     subclasses BaseModel, declarative base
     '''
+
     __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete",
-                          backref="state", passive_deletes=True)
+    if getenv('HBNB_TYPE_STORAGE') is not None:
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", cascade="all, delete",
+                              backref="state", passive_deletes=True)
+    else:
+        name = ""
 
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property

@@ -3,18 +3,26 @@
 defines a class User
 '''
 
+from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    '''this class defines a HBnB user person'''
-    __tablename__ = 'users'
+    """This class defines a user by various attributes"""
 
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
-    places = relationship('Place', cascade='all, delete', backref='user',
-                          passive_deletes=True)
+    __tablename__ = 'users'
+    if getenv('HBNB_TYPE_STORAGE') is not None:
+
+        email = Column(String(128), nullable=False)
+        password = Column(String(128), nullable=False)
+        first_name = Column(String(128), nullable=True)
+        last_name = Column(String(128), nullable=True)
+        places = relationship('Place', cascade='all, delete', backref='user',
+                              passive_deletes=True)
+    else:
+        email = ''
+        password = ''
+        first_name = ''
+        last_name = ''
