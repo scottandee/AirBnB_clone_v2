@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.user import User
 from models.place import Place
+from models.review import Review
 
 
 class DBStorage():
@@ -45,9 +46,11 @@ class DBStorage():
         from models.city import City
         from models.user import User
         from models.place import Place
+        from models.review import Review
 
         objects = {}
-        classes = {'State': State, 'City': City, 'User': User, 'Place': Place}
+        classes = {'State': State, 'City': City, 'User': User, 'Place': Place,
+                   'Review': Review}
         if cls:
             if isinstance(cls, str) and cls in classes:
                 cls = eval(cls)
