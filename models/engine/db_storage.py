@@ -8,6 +8,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models.state import State
 from models.city import City
+from models.user import User
 
 
 class DBStorage():
@@ -41,9 +42,10 @@ class DBStorage():
         '''query all objects from the database'''
         from models.state import State
         from models.city import City
+        from models.user import User
 
         objects = {}
-        classes = {'State': State, 'City': City}
+        classes = {'State': State, 'City': City, 'User': User}
         if cls:
             if isinstance(cls, str) and cls in classes:
                 cls = eval(cls)
