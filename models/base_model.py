@@ -3,7 +3,6 @@
 for subclassing
 this module defines a base class for all models in our hbnb clone'''
 
-
 import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, DateTime
