@@ -2,15 +2,17 @@
 '''
 DBStorage module for HBNB project
 '''
+
 from os import environ
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.base_model import Base
+from models.base_model import BaseModel, Base
 from models.state import State
 from models.city import City
 from models.user import User
 from models.place import Place
 from models.review import Review
+from models.amenity import Amenity
 
 
 class DBStorage():
@@ -42,15 +44,11 @@ class DBStorage():
 
     def all(self, cls=None):
         '''query all objects from the database'''
-        from models.state import State
-        from models.city import City
-        from models.user import User
-        from models.place import Place
-        from models.review import Review
-
         objects = {}
+
         classes = {'State': State, 'City': City, 'User': User, 'Place': Place,
-                   'Review': Review}
+                   'Review': Review, 'Amenity': Amenity}
+
         if cls:
             if isinstance(cls, str) and cls in classes:
                 cls = eval(cls)
