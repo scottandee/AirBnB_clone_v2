@@ -31,7 +31,7 @@ then
         sudo mkdir /data/web_static/releases/test/
 fi
 
-sudo echo "<h1>Hello World</h1>" > /data/web_static/releases/test/index.html
+echo "<h1>Hello World</h1>" | sudo tee /data/web_static/releases/test/index.html
 
 # If symbolic link exists, delete it and create another
 if [ -L "/data/web_static/current" ]
