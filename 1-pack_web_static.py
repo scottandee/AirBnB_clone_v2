@@ -14,11 +14,13 @@ def do_pack():
     all the contents of the web_static folder"""
 
     today = datetime.today()
+    path_to_archive = "versions/web_static_{}{}{}{}{}.tgz".format(
+                       today.year, today.month, today.day, today.hour,
+                       today.minute, today.second)
+    print("Packing web_static to {}".format(path_to_archive))
+
     if not os.path.exists("versions/"):
         local("mkdir versions/")
-    path_to_archive = "versions/web_static_{}{}{}{}{}.tgz".format(
-                        today.year, today.month, today.day, today.hour,
-                        today.minute, today.second)
 
     if local("tar -cvzf {} web_static".format(path_to_archive)).succeeded:
         return path_to_archive
