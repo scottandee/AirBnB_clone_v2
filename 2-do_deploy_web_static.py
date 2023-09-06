@@ -1,49 +1,56 @@
 #!/usr/bin/python3
-"""This script contains the function do_deploy
-that distributes an archive to our web servers
+"""This script contains the declaration
+for the do_deploy function which uploads
+the archive to the server for live testing
 """
 
-from fabric.api import put, run, env
+from fabric.api import run, put, env
 import os
 
 
-env.username = "ubuntu"
-env.hosts = ["100.26.235.45", "100.25.222.11"]
+env.user = "ubuntu"
+env.hosts = ['52.91.203.19', '100.25.17.109']
 
 
 def do_deploy(archive_path):
-    """This function distributes an archive
-    to my webservers"""
-
+    """This function distributes the archives
+    to webservers for testing
+    """
     if not os.path.exists(archive_path):
         return False
 
-    if put("{}".format(archive_path), "/tmp/").failed:
+    path = archive_path.split('/')
+    # path = ['versions/', 'web_static_20170315003959.tgz']"
+
+    arch_filename = path[1]
+    split_arch = arch_filename.split('.')
+    # split_arch = ['web_static_20170315003959', 'tgz']
+
+    server_arch_path = f'/tmp/{arch_filename}'
+    xarch_path = f"/data/web_static/releases/{split_arch[0]}"
+
+    if put(archive_path, '/tmp').failed:
         return False
 
-    archive = archive_path.split("/")
-    archive_w_exten = archive[1]
-    archive_wout_exten = archive[1][:-4]
-
-    if run(f"mkdir -p /data/web_static/releases/{archive_wout_exten}/").failed:
+    if run(f"mkdir -p {xarch_path}").failed:
         return False
 
-    if run(f"""tar -xzf /tmp/{archive_w_exten} -C /data/web_static/releases/{archive_wout_exten}/""").failed:
+    if run(f"tar -xzf {server_arch_path} -C {xarch_path}").failed:
         return False
 
-    if run(f"rm /tmp/{archive_w_exten}").failed:
+    if run(f"rm {server_arch_path}").failed:
         return False
 
-    if run(f"""mv /data/web_static/releases/{archive_wout_exten}/web_static/* /data/web_static/releases/{archive_wout_exten}/""").failed:
+    if run(f"mv {xarch_path}/web_static/* {xarch_path}").failed:
         return False
 
-    if run(f"rm -rf /data/web_static/releases/{archive_wout_exten}/web_static/").failed:
+    if run(f"rm -rf {xarch_path}/web_static").failed:
         return False
 
-    if run(f"rm -rf /data/web_static/current").failed:
+    if run("rm -rf /data/web_static/current").failed:
         return False
 
-    if run(f"ln -s /data/web_static/releases/{archive_wout_exten}/ /data/web_static/current").failed:
+    if run(f"ln -s {xarch_path} /data/web_static/current").failed:
         return False
 
     print("New version deployed!")
