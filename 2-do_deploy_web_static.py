@@ -8,7 +8,6 @@ from fabric.api import run, put, env
 import os
 
 
-env.user = "ubuntu"
 env.hosts = ['52.91.203.19', '100.25.17.109']
 
 
