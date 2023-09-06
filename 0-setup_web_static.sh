@@ -6,32 +6,13 @@
 sudo apt-get update
 sudo apt-get install nginx
 
-if [ ! -d "/data/" ]
-then
-        sudo mkdir /data/
-fi
+sudo mkdir /data/
+sudo mkdir /data/web_static/
+sudo mkdir /data/web_static/releases/
+sudo mkdir /data/web_static/shared/
+sudo mkdir /data/web_static/releases/test/
 
-if [ ! -d "/data/web_static/" ]
-then
-        sudo mkdir /data/web_static/
-fi
-
-if [ ! -d "/data/web_static/releases/" ]
-then
-        sudo mkdir /data/web_static/releases/
-fi
-
-if [ ! -d "/data/web_static/shared/" ]
-then
-        sudo mkdir /data/web_static/shared/
-fi
-
-if [ ! -d "/data/web_static/releases/test/" ]
-then
-        sudo mkdir /data/web_static/releases/test/
-fi
-
-echo "<h1>Hello World</h1>" | sudo tee /data/web_static/releases/test/index.html
+echo "<h1>Hello World</h1>" | sudo tee /data/web_static/releases/test/index.html > /dev/null
 
 # If symbolic link exists, delete it and create another
 if [ -L "/data/web_static/current" ]
