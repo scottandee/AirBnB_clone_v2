@@ -26,4 +26,6 @@ def do_pack():
     if result.failed:
         return None
     else:
+        arch_size = os.path.getsize(arch) 
+        print(f"web_static packed: {arch} -> {arch_size}Bytes")
         return arch
