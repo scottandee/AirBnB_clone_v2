@@ -3,8 +3,8 @@
 # of web_static
 
 # update and install nginx if not installed
-sudo apt-get update
-sudo apt-get install nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
 
 if [ ! -d "/data/" ]
 then
