@@ -51,7 +51,7 @@ def do_deploy(archive_path):
     # split_arch = ['web_static_20170315003959', 'tgz']
 
     server_arch_path = f'/tmp/{arch_filename}'
-    xarch_path = f"/data/web_static/releases/{split_arch[0]}"
+    xarch_path = f"/data/web_static/releases/{split_arch[0]}/"
 
     if put(archive_path, '/tmp').failed:
         return False
@@ -68,7 +68,7 @@ def do_deploy(archive_path):
     if run(f"mv {xarch_path}/web_static/* {xarch_path}").failed:
         return False
 
-    if run(f"rm -rf {xarch_path}/web_static").failed:
+    if run(f"rm -rf {xarch_path}web_static").failed:
         return False
 
     if run("rm -rf /data/web_static/current").failed:
