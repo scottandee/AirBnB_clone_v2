@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""This script is based on `1-hbnb_route.py`.
-The new route takes input from the client and
-displays it on the page
+""" This script is based on `2-c_route.py`.
+It contains A new route that has a default
+value of text
 """
 
 from flask import Flask
@@ -35,5 +35,14 @@ def display_c(text):
     return f"C {escape(text)}".replace("_", " ")
 
 
-if __name__ == '__main__':
+@app.route('/python', strict_slashes=False, defaults={"text": "is_cool"})
+@app.route('/python/<text>', strict_slashes=False)
+def display_py(text):
+    """This displays "Python followed by the
+    value of the "text" variable
+    """
+    return f"Python {escape(text)}".replace("_", " ")
+
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0")

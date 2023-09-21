@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""This script builds on task 0 and
-adds a new route called '/hbnb'
+"""This script builds on `0-hello_route.py`
+and adds a new route called '/hbnb'
 """
 
 from flask import Flask
