@@ -73,3 +73,7 @@ class FileStorage:
                 del self.__objects[obj_key]
         else:
             pass
+
+    def close(self):
+        '''This refreshes the FileStorage'''
+        self.reload()

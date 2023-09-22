@@ -45,6 +45,14 @@ class DBStorage():
     def all(self, cls=None):
         '''query all objects from the database'''
         objects = {}
+        from models.base_model import BaseModel, Base
+        from models.state import State
+        from models.city import City
+        from models.user import User
+        from models.place import Place
+        from models.review import Review
+        from models.amenity import Amenity
+
 
         classes = {'State': State, 'City': City, 'User': User, 'Place': Place,
                    'Review': Review, 'Amenity': Amenity}
@@ -52,7 +60,7 @@ class DBStorage():
         if cls:
             if isinstance(cls, str) and cls in classes:
                 cls = eval(cls)
-            if cls in classes:
+            if cls in classes.values():
                 objs = self.__session.query(cls).all()
                 for obj in objs:
                     key = f'{type(obj).__name__}.{obj.id}'
@@ -84,3 +92,7 @@ class DBStorage():
         Session = scoped_session(sessionmaker(bind=self.__engine,
                                               expire_on_commit=False))
         self.__session = Session()
+
+    def close(self):
+        '''This removes the current session'''
+        self.__session.close()
