@@ -20,10 +20,11 @@ class State(BaseModel, Base):
     '''
 
     __tablename__ = 'states'
+    
     if getenv('HBNB_TYPE_STORAGE') is not None:
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade="all, delete",
-                              backref="state", passive_deletes=True)
+                               backref="state", passive_deletes=True)
     else:
         name = ""
 
