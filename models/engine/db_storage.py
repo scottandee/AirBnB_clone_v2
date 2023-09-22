@@ -53,7 +53,6 @@ class DBStorage():
         from models.review import Review
         from models.amenity import Amenity
 
-
         classes = {'State': State, 'City': City, 'User': User, 'Place': Place,
                    'Review': Review, 'Amenity': Amenity}
 
