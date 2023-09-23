@@ -6,14 +6,14 @@
     <body>
         <h1>States</h1>
         <ul>
-            {% for state in states.values() %}
-                <li>{{ state.id }}: <b>{{ state.name }}</b></li>
-                    <ul>
-                        {% for city in state.cities %}
-                                <li>{{ city.id }}: <b>{{ city.name }}</b></li>
-                        {% endfor %}
-                    </ul>
-            {% endfor %}
+        {% for state in states.values() %}
+            <li>{{ state.id }}: <b>{{ state.name }}</b></li>
+                <ul>
+                {% for city in state.cities %}
+                    <li>{{ city.id }}: <b>{{ city.name }}</b></li>
+                {% endfor %}
+                </ul>
+        {% endfor %}
         </ul>
     </body>
 </html>
